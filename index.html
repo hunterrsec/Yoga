@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Polem Beach Yoga — The Art of Living Well</title>
     <meta name="description" content="Experience transformational yoga, meditation, and wellness on the pristine shores of Polem Beach, South Goa, India.">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,57 +41,30 @@
         }
     </script>
     <style>
-        :root {
-            --cursor-x: 50%;
-            --cursor-y: 50%;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #040608;
-            color: #f9f6ef;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #040608; 
+            color: #f9f6ef; 
             overflow-x: hidden;
-            cursor: default;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+        ::selection { background: rgba(212, 175, 55, 0.3); color: #fdfcf8; }
 
-        ::selection {
-            background: rgba(212, 175, 55, 0.3);
-            color: #fdfcf8;
-        }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #080c10; }
+        ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.4); border-radius: 3px; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #080c10;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(212, 175, 55, 0.4);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(212, 175, 55, 0.6);
-        }
-
-        /* Glassmorphism */
+        /* Glass */
         .glass {
-            background: rgba(8, 12, 16, 0.6);
+            background: rgba(8, 12, 16, 0.75);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
         .glass-light {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(16px) saturate(180%);
@@ -106,7 +79,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .text-gradient-gold {
             background: linear-gradient(135deg, #d4af37 0%, #f0ebe0 50%, #d4af37 100%);
             -webkit-background-clip: text;
@@ -119,27 +91,19 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
-
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
-        }
-
         @keyframes ken-burns {
             0% { transform: scale(1) translate(0, 0); }
             100% { transform: scale(1.15) translate(-2%, -1%); }
         }
-
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-
         @keyframes fade-up {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+        @keyframes loaderExpand {
+            0% { width: 0; opacity: 0; }
+            50% { opacity: 1; }
+            100% { width: 200px; opacity: 1; }
+        }
         @keyframes grain {
             0%, 100% { transform: translate(0, 0); }
             10% { transform: translate(-5%, -10%); }
@@ -153,30 +117,16 @@
             90% { transform: translate(-10%, 10%); }
         }
 
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-ken-burns { animation: ken-burns 20s ease-out forwards; }
 
-        .animate-ken-burns {
-            animation: ken-burns 20s ease-out forwards;
-        }
-
-        .animate-shimmer {
-            background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
-        }
-
-        /* Reveal on scroll */
+        /* Reveal */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        .reveal.active { opacity: 1; transform: translateY(0); }
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
@@ -190,7 +140,6 @@
             background-position: center;
             will-change: transform;
         }
-
         .hero-overlay {
             position: absolute;
             inset: 0;
@@ -201,7 +150,7 @@
                 rgba(4, 6, 8, 0.95) 100%);
         }
 
-        /* Film grain overlay */
+        /* Grain */
         .grain-overlay {
             position: fixed;
             inset: 0;
@@ -212,11 +161,8 @@
             animation: grain 8s steps(10) infinite;
         }
 
-        /* Navigation */
-        .nav-link {
-            position: relative;
-            overflow: hidden;
-        }
+        /* Nav */
+        .nav-link { position: relative; overflow: hidden; }
         .nav-link::after {
             content: '';
             position: absolute;
@@ -228,15 +174,14 @@
             transform: translateX(-100%);
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .nav-link:hover::after {
-            transform: translateX(0);
-        }
+        .nav-link:hover::after { transform: translateX(0); }
 
         /* Buttons */
         .btn-luxury {
             position: relative;
             overflow: hidden;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            touch-action: manipulation;
         }
         .btn-luxury::before {
             content: '';
@@ -246,25 +191,25 @@
             opacity: 0;
             transition: opacity 0.6s;
         }
-        .btn-luxury:hover::before {
-            opacity: 1;
-        }
-        .btn-luxury:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
-        }
+        .btn-luxury:hover::before { opacity: 1; }
+        .btn-luxury:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15); }
+        .btn-luxury:active { transform: translateY(0); }
 
         /* Image hover */
         .img-luxury {
             transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             filter: brightness(0.9) saturate(0.9);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .img-luxury:hover {
             transform: scale(1.05);
             filter: brightness(1) saturate(1);
         }
 
-        /* Masonry Gallery */
+        /* Masonry */
         .masonry-grid {
             column-count: 3;
             column-gap: 1rem;
@@ -278,13 +223,29 @@
         .masonry-item {
             break-inside: avoid;
             margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
         }
+        .masonry-item img {
+            width: 100%;
+            display: block;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+        }
+        .masonry-item img:hover { transform: scale(1.03); opacity: 0.9; }
 
-        /* Form styling */
+        /* Form */
         .input-luxury {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #f9f6ef;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            -webkit-appearance: none;
         }
         .input-luxury:focus {
             border-color: rgba(212, 175, 55, 0.5);
@@ -292,10 +253,16 @@
             outline: none;
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
         }
+        .input-luxury::placeholder { color: rgba(249, 246, 239, 0.3); }
 
         /* Step indicator */
         .step-dot {
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 9999px;
+            background: #52525b;
+            flex-shrink: 0;
         }
         .step-dot.active {
             background: #d4af37;
@@ -303,9 +270,16 @@
         }
         .step-line {
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 2rem;
+            height: 1px;
+            background: #3f3f46;
+            flex-shrink: 0;
+        }
+        @media (min-width: 640px) {
+            .step-line { width: 3rem; }
         }
 
-        /* Testimonial card */
+        /* Testimonial */
         .testimonial-card {
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -314,56 +288,23 @@
             border-color: rgba(212, 175, 55, 0.3);
         }
 
-        /* Parallax section */
-        .parallax-section {
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-        }
-        @media (max-width: 768px) {
-            .parallax-section {
-                background-attachment: scroll;
-            }
-        }
-
-        /* Cursor glow effect */
-        .cursor-glow {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: left 0.3s ease-out, top 0.3s ease-out;
-            z-index: 9998;
-            mix-blend-mode: screen;
-        }
-
-        /* Loading screen */
-        .loader {
-            position: fixed;
-            inset: 0;
-            background: #040608;
-            z-index: 10000;
+        /* Horizontal scroll retreats */
+        .retreat-scroll {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            transition: opacity 1s ease, visibility 1s ease;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 1rem 0.5rem 2rem;
+            margin: 0 -0.5rem;
         }
-        .loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .loader-line {
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #d4af37, transparent);
-            animation: loaderExpand 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes loaderExpand {
-            to { width: 200px; }
+        .retreat-scroll::-webkit-scrollbar { display: none; }
+        .retreat-card {
+            scroll-snap-align: center;
+            flex-shrink: 0;
+            width: 85vw;
+            max-width: 420px;
         }
 
         /* Lightbox */
@@ -377,40 +318,111 @@
             justify-content: center;
             opacity: 0;
             transition: opacity 0.4s;
+            padding: 1rem;
         }
-        .lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
+        .lightbox.active { display: flex; opacity: 1; }
         .lightbox img {
-            max-width: 90vw;
-            max-height: 90vh;
+            max-width: 100%;
+            max-height: 85vh;
             object-fit: contain;
             transform: scale(0.9);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 0.5rem;
         }
-        .lightbox.active img {
-            transform: scale(1);
+        .lightbox.active img { transform: scale(1); }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: #040608;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+        .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            animation: loaderExpand 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Horizontal scroll for retreats */
-        .retreat-scroll {
+        /* Cursor glow - desktop only */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: left 0.3s ease-out, top 0.3s ease-out;
+            z-index: 9998;
+            mix-blend-mode: screen;
+        }
+
+        /* Chapter sections */
+        .chapter-section {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
             display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding: 2rem 0;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
-        .retreat-scroll::-webkit-scrollbar {
-            display: none;
+        .chapter-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
-        .retreat-card {
-            scroll-snap-align: start;
-            flex-shrink: 0;
-            width: 85vw;
-            max-width: 500px;
+        .chapter-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(4, 6, 8, 0.7), rgba(4, 6, 8, 0.3), rgba(4, 6, 8, 0.8));
+        }
+        .chapter-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+
+        /* Mobile menu */
+        #mobileMenu {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #mobileMenu.open {
+            max-height: 600px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Aspect ratio helpers */
+        .aspect-hero { aspect-ratio: 16/9; }
+        .aspect-portrait { aspect-ratio: 3/4; }
+        .aspect-square { aspect-ratio: 1/1; }
+
+        /* Prevent text selection on buttons */
+        .no-select {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Smooth image loading */
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
         }
 
         /* Number styling */
@@ -418,17 +430,22 @@
             font-variant-numeric: tabular-nums;
             letter-spacing: -0.02em;
         }
+
+        /* Fix iOS input zoom */
+        @supports (-webkit-touch-callout: none) {
+            .input-luxury { font-size: 16px; }
+        }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loader" id="loader">
-        <div class="font-serif text-2xl md:text-4xl text-sand-100 tracking-widest mb-8">POLEM BEACH YOGA</div>
+        <div class="font-serif text-2xl md:text-4xl text-sand-100 tracking-widest mb-8 text-center px-4">POLEM BEACH YOGA</div>
         <div class="loader-line"></div>
-        <div class="mt-4 text-xs tracking-[0.3em] text-sand-300 uppercase">South Goa, India</div>
+        <div class="mt-4 text-xs tracking-[0.3em] text-sand-300 uppercase text-center">South Goa, India</div>
     </div>
 
-    <!-- Cursor Glow -->
+    <!-- Cursor Glow (desktop only) -->
     <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
 
     <!-- Film Grain -->
@@ -436,34 +453,34 @@
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <img src="" alt="Gallery Image" id="lightboxImg">
+        <img src="" alt="Gallery Image" id="lightboxImg" onclick="event.stopPropagation()">
     </div>
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-700" id="navbar">
-        <div class="glass mx-4 md:mx-8 mt-4 rounded-2xl px-6 py-4">
+        <div class="glass mx-3 md:mx-6 lg:mx-8 mt-3 md:mt-4 rounded-2xl px-4 md:px-6 py-3 md:py-4">
             <div class="flex items-center justify-between">
-                <a href="#home" class="font-serif text-xl md:text-2xl text-sand-100 tracking-wider">
+                <a href="#home" class="font-serif text-xl md:text-2xl text-sand-100 tracking-wider no-select">
                     Polem<span class="text-gold-300">.</span>
                 </a>
 
-                <div class="hidden lg:flex items-center gap-8">
-                    <a href="#home" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors">Home</a>
-                    <a href="#retreats" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors">Retreats</a>
-                    <a href="#experience" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors">Experience</a>
-                    <a href="#gallery" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors">Gallery</a>
-                    <a href="#accommodation" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors">Stay</a>
-                    <a href="#about" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors">About</a>
-                    <a href="#directions" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors">Directions</a>
-                    <a href="#contact" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors">Contact</a>
+                <div class="hidden lg:flex items-center gap-6 xl:gap-8">
+                    <a href="#home" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-1">Home</a>
+                    <a href="#retreats" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-1">Retreats</a>
+                    <a href="#experience" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-1">Experience</a>
+                    <a href="#gallery" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-1">Gallery</a>
+                    <a href="#accommodation" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-1">Stay</a>
+                    <a href="#about" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-1">About</a>
+                    <a href="#directions" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-1">Directions</a>
+                    <a href="#contact" class="nav-link text-xs tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-1">Contact</a>
                 </div>
 
-                <div class="flex items-center gap-4">
-                    <a href="#apply" class="hidden md:inline-flex btn-luxury items-center gap-2 px-6 py-3 bg-gold-400/10 border border-gold-400/30 rounded-full text-gold-300 text-xs tracking-[0.2em] uppercase">
+                <div class="flex items-center gap-3 md:gap-4">
+                    <a href="#apply" class="hidden md:inline-flex btn-luxury items-center gap-2 px-5 py-2.5 bg-gold-400/10 border border-gold-400/30 rounded-full text-gold-300 text-xs tracking-[0.2em] uppercase no-select">
                         <span>Apply Now</span>
                         <i class="fas fa-arrow-right text-[10px]"></i>
                     </a>
-                    <button class="lg:hidden text-sand-100 text-xl" onclick="toggleMobileMenu()">
+                    <button class="lg:hidden text-sand-100 text-xl p-2 no-select" onclick="toggleMobileMenu()" aria-label="Toggle menu">
                         <i class="fas fa-bars" id="menuIcon"></i>
                     </button>
                 </div>
@@ -471,24 +488,24 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div class="lg:hidden hidden mx-4 md:mx-8 mt-2 glass rounded-2xl p-6" id="mobileMenu">
-            <div class="flex flex-col gap-4">
-                <a href="#home" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors" onclick="toggleMobileMenu()">Home</a>
-                <a href="#retreats" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors" onclick="toggleMobileMenu()">Retreats</a>
-                <a href="#experience" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors" onclick="toggleMobileMenu()">Experience</a>
-                <a href="#gallery" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors" onclick="toggleMobileMenu()">Gallery</a>
-                <a href="#accommodation" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors" onclick="toggleMobileMenu()">Stay</a>
-                <a href="#about" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors" onclick="toggleMobileMenu()">About</a>
-                <a href="#directions" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors" onclick="toggleMobileMenu()">Directions</a>
-                <a href="#contact" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors" onclick="toggleMobileMenu()">Contact</a>
-                <a href="#apply" class="mt-4 btn-luxury text-center px-6 py-3 bg-gold-400/10 border border-gold-400/30 rounded-full text-gold-300 text-xs tracking-[0.2em] uppercase" onclick="toggleMobileMenu()">Apply Now</a>
+        <div class="glass mx-3 md:mx-6 lg:mx-8 rounded-2xl" id="mobileMenu">
+            <div class="flex flex-col gap-1 p-4">
+                <a href="#home" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-3 px-2 rounded-lg hover:bg-white/5" onclick="toggleMobileMenu()">Home</a>
+                <a href="#retreats" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-3 px-2 rounded-lg hover:bg-white/5" onclick="toggleMobileMenu()">Retreats</a>
+                <a href="#experience" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-3 px-2 rounded-lg hover:bg-white/5" onclick="toggleMobileMenu()">Experience</a>
+                <a href="#gallery" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-3 px-2 rounded-lg hover:bg-white/5" onclick="toggleMobileMenu()">Gallery</a>
+                <a href="#accommodation" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-3 px-2 rounded-lg hover:bg-white/5" onclick="toggleMobileMenu()">Stay</a>
+                <a href="#about" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-3 px-2 rounded-lg hover:bg-white/5" onclick="toggleMobileMenu()">About</a>
+                <a href="#directions" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-3 px-2 rounded-lg hover:bg-white/5" onclick="toggleMobileMenu()">Directions</a>
+                <a href="#contact" class="text-sm tracking-[0.2em] uppercase text-sand-300 hover:text-sand-100 transition-colors py-3 px-2 rounded-lg hover:bg-white/5" onclick="toggleMobileMenu()">Contact</a>
+                <a href="#apply" class="mt-2 btn-luxury text-center px-6 py-3 bg-gold-400/10 border border-gold-400/30 rounded-full text-gold-300 text-xs tracking-[0.2em] uppercase" onclick="toggleMobileMenu()">Apply Now</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen w-full overflow-hidden">
-        <div class="hero-bg animate-ken-burns" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80');"></div>
+    <section id="home" class="relative h-screen w-full overflow-hidden min-h-[600px]">
+        <div class="hero-bg animate-ken-burns" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80&auto=format&fit=crop');"></div>
         <div class="hero-overlay"></div>
 
         <!-- Floating Particles Canvas -->
@@ -496,97 +513,97 @@
 
         <div class="relative z-20 h-full flex flex-col items-center justify-center px-4 text-center">
             <div class="reveal">
-                <div class="text-xs md:text-sm tracking-[0.4em] uppercase text-gold-300 mb-6 font-light">
+                <div class="text-xs md:text-sm tracking-[0.4em] uppercase text-gold-300 mb-4 md:mb-6 font-light">
                     South Goa, India
                 </div>
             </div>
 
-            <h1 class="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-9xl text-sand-50 leading-[0.9] mb-6">
+            <h1 class="reveal reveal-delay-1 font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-sand-50 leading-[0.9] mb-4 md:mb-6">
                 Discover The<br>
                 <span class="italic text-gradient-gold">Art Of Living</span> Well
             </h1>
 
-            <p class="reveal reveal-delay-2 max-w-2xl text-sand-300 text-sm md:text-base lg:text-lg leading-relaxed font-light mb-12">
+            <p class="reveal reveal-delay-2 max-w-xl md:max-w-2xl text-sand-300 text-sm md:text-base lg:text-lg leading-relaxed font-light mb-8 md:mb-12 px-4">
                 Experience transformational yoga, meditation, wellness, and ocean living on one of Goa's most peaceful beaches.
             </p>
 
-            <div class="reveal reveal-delay-3 flex flex-col sm:flex-row gap-4">
-                <a href="#apply" class="btn-luxury px-8 py-4 bg-gold-400 text-deep-950 rounded-full text-xs tracking-[0.2em] uppercase font-medium">
+            <div class="reveal reveal-delay-3 flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto px-8 sm:px-0">
+                <a href="#apply" class="btn-luxury px-6 md:px-8 py-3.5 md:py-4 bg-gold-400 text-deep-950 rounded-full text-xs tracking-[0.2em] uppercase font-medium text-center no-select">
                     Begin Your Journey
                 </a>
-                <a href="#retreats" class="btn-luxury px-8 py-4 glass-light text-sand-100 rounded-full text-xs tracking-[0.2em] uppercase">
+                <a href="#retreats" class="btn-luxury px-6 md:px-8 py-3.5 md:py-4 glass-light text-sand-100 rounded-full text-xs tracking-[0.2em] uppercase text-center no-select">
                     View Retreats
                 </a>
             </div>
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-float">
+        <div class="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-float">
             <span class="text-[10px] tracking-[0.3em] uppercase text-sand-300">Scroll</span>
-            <div class="w-px h-12 bg-gradient-to-b from-gold-300 to-transparent"></div>
+            <div class="w-px h-10 md:h-12 bg-gradient-to-b from-gold-300 to-transparent"></div>
         </div>
     </section>
 
     <!-- Cinematic Storytelling Sections -->
     <section class="relative py-0">
         <!-- Chapter 1: Sunrise -->
-        <div class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=1920&q=80'); background-size: cover; background-position: center;"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-deep-950/60 via-deep-950/20 to-deep-950/80"></div>
-            <div class="relative z-10 text-center px-4 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Chapter I</div>
-                <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl text-sand-50 italic">"Wake up with<br>the ocean."</h2>
+        <div class="chapter-section">
+            <div class="chapter-bg" style="background-image: url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=1920&q=80&auto=format&fit=crop');"></div>
+            <div class="chapter-overlay"></div>
+            <div class="chapter-content reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Chapter I</div>
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-sand-50 italic leading-tight">"Wake up with<br>the ocean."</h2>
             </div>
         </div>
 
         <!-- Chapter 2: Meditation -->
-        <div class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1920&q=80'); background-size: cover; background-position: center;"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-deep-950/70 via-deep-950/30 to-deep-950/80"></div>
-            <div class="relative z-10 text-center px-4 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Chapter II</div>
-                <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl text-sand-50 italic">"Reconnect with<br>your breath."</h2>
+        <div class="chapter-section">
+            <div class="chapter-bg" style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1920&q=80&auto=format&fit=crop');"></div>
+            <div class="chapter-overlay"></div>
+            <div class="chapter-content reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Chapter II</div>
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-sand-50 italic leading-tight">"Reconnect with<br>your breath."</h2>
             </div>
         </div>
 
         <!-- Chapter 3: Yoga -->
-        <div class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1920&q=80'); background-size: cover; background-position: center;"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-deep-950/60 via-deep-950/20 to-deep-950/80"></div>
-            <div class="relative z-10 text-center px-4 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Chapter III</div>
-                <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl text-sand-50 italic">"Transform mind<br>and body."</h2>
+        <div class="chapter-section">
+            <div class="chapter-bg" style="background-image: url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1920&q=80&auto=format&fit=crop');"></div>
+            <div class="chapter-overlay"></div>
+            <div class="chapter-content reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Chapter III</div>
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-sand-50 italic leading-tight">"Transform mind<br>and body."</h2>
             </div>
         </div>
 
         <!-- Chapter 4: Community -->
-        <div class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80'); background-size: cover; background-position: center;"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-deep-950/70 via-deep-950/30 to-deep-950/80"></div>
-            <div class="relative z-10 text-center px-4 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Chapter IV</div>
-                <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl text-sand-50 italic">"Meet people on the<br>same journey."</h2>
+        <div class="chapter-section">
+            <div class="chapter-bg" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80&auto=format&fit=crop');"></div>
+            <div class="chapter-overlay"></div>
+            <div class="chapter-content reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Chapter IV</div>
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-sand-50 italic leading-tight">"Meet people on the<br>same journey."</h2>
             </div>
         </div>
 
         <!-- Chapter 5: Nature -->
-        <div class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1516815231560-8f41ec531527?w=1920&q=80'); background-size: cover; background-position: center;"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-deep-950/60 via-deep-950/20 to-deep-950/80"></div>
-            <div class="relative z-10 text-center px-4 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Chapter V</div>
-                <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl text-sand-50 italic">"Experience Goa<br>differently."</h2>
+        <div class="chapter-section">
+            <div class="chapter-bg" style="background-image: url('https://images.unsplash.com/photo-1516815231560-8f41ec531527?w=1920&q=80&auto=format&fit=crop');"></div>
+            <div class="chapter-overlay"></div>
+            <div class="chapter-content reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Chapter V</div>
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-sand-50 italic leading-tight">"Experience Goa<br>differently."</h2>
             </div>
         </div>
     </section>
 
     <!-- Retreats Section -->
-    <section id="retreats" class="relative py-32 px-4 md:px-8">
+    <section id="retreats" class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Curated Journeys</div>
-                <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl text-sand-50 mb-6">Our Retreats</h2>
-                <p class="max-w-xl mx-auto text-sand-300 font-light leading-relaxed">
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Curated Journeys</div>
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-sand-50 mb-4 md:mb-6">Our Retreats</h2>
+                <p class="max-w-xl mx-auto text-sand-300 font-light leading-relaxed text-sm md:text-base px-4">
                     Each retreat is a carefully orchestrated experience designed to guide you toward transformation, peace, and renewed vitality.
                 </p>
             </div>
@@ -594,21 +611,21 @@
             <div class="retreat-scroll">
                 <!-- Weekend Escape -->
                 <div class="retreat-card group">
-                    <div class="relative h-[600px] rounded-2xl overflow-hidden glass-light">
+                    <div class="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden glass-light">
                         <div class="absolute inset-0">
-                            <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&q=80" alt="Weekend Escape" class="w-full h-full object-cover img-luxury">
+                            <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&q=80&auto=format&fit=crop" alt="Weekend Escape - Beach yoga retreat in Goa" class="img-luxury" loading="lazy">
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/50 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                             <div class="text-gold-300 text-xs tracking-[0.3em] uppercase mb-2">2 Nights</div>
-                            <h3 class="font-serif text-3xl md:text-4xl text-sand-50 mb-3">Weekend Escape</h3>
-                            <p class="text-sand-300 text-sm leading-relaxed mb-6">A rejuvenating introduction to beach yoga and mindful living. Perfect for those seeking a quick reset.</p>
-                            <div class="flex flex-wrap gap-2 mb-6">
+                            <h3 class="font-serif text-2xl md:text-3xl lg:text-4xl text-sand-50 mb-3">Weekend Escape</h3>
+                            <p class="text-sand-300 text-sm leading-relaxed mb-4 md:mb-6">A rejuvenating introduction to beach yoga and mindful living. Perfect for those seeking a quick reset.</p>
+                            <div class="flex flex-wrap gap-2 mb-4 md:mb-6">
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Beach Yoga</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Meditation</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Ayurvedic Meals</span>
                             </div>
-                            <a href="#apply" class="inline-flex items-center gap-2 text-gold-300 text-xs tracking-[0.2em] uppercase group-hover:gap-4 transition-all">
+                            <a href="#apply" class="inline-flex items-center gap-2 text-gold-300 text-xs tracking-[0.2em] uppercase group-hover:gap-4 transition-all no-select">
                                 Inquire <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -617,22 +634,22 @@
 
                 <!-- 5-Day Wellness -->
                 <div class="retreat-card group">
-                    <div class="relative h-[600px] rounded-2xl overflow-hidden glass-light">
+                    <div class="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden glass-light">
                         <div class="absolute inset-0">
-                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80" alt="5-Day Wellness" class="w-full h-full object-cover img-luxury">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80&auto=format&fit=crop" alt="5-Day Wellness Retreat - Holistic healing in South Goa" class="img-luxury" loading="lazy">
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/50 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                             <div class="text-gold-300 text-xs tracking-[0.3em] uppercase mb-2">5 Days</div>
-                            <h3 class="font-serif text-3xl md:text-4xl text-sand-50 mb-3">Wellness Retreat</h3>
-                            <p class="text-sand-300 text-sm leading-relaxed mb-6">Deep dive into holistic wellness with daily yoga, breathwork, sound healing, and personalized Ayurvedic consultations.</p>
-                            <div class="flex flex-wrap gap-2 mb-6">
+                            <h3 class="font-serif text-2xl md:text-3xl lg:text-4xl text-sand-50 mb-3">Wellness Retreat</h3>
+                            <p class="text-sand-300 text-sm leading-relaxed mb-4 md:mb-6">Deep dive into holistic wellness with daily yoga, breathwork, sound healing, and personalized Ayurvedic consultations.</p>
+                            <div class="flex flex-wrap gap-2 mb-4 md:mb-6">
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Daily Yoga</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Breathwork</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Sound Healing</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Ayurveda</span>
                             </div>
-                            <a href="#apply" class="inline-flex items-center gap-2 text-gold-300 text-xs tracking-[0.2em] uppercase group-hover:gap-4 transition-all">
+                            <a href="#apply" class="inline-flex items-center gap-2 text-gold-300 text-xs tracking-[0.2em] uppercase group-hover:gap-4 transition-all no-select">
                                 Inquire <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -641,25 +658,25 @@
 
                 <!-- 7-Day Transformation -->
                 <div class="retreat-card group">
-                    <div class="relative h-[600px] rounded-2xl overflow-hidden glass-light border border-gold-400/20">
-                        <div class="absolute top-4 right-4 px-3 py-1 bg-gold-400/20 rounded-full">
+                    <div class="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden glass-light border border-gold-400/20">
+                        <div class="absolute top-4 right-4 px-3 py-1 bg-gold-400/20 rounded-full z-10">
                             <span class="text-gold-300 text-[10px] tracking-wider uppercase">Most Popular</span>
                         </div>
                         <div class="absolute inset-0">
-                            <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=800&q=80" alt="7-Day Transformation" class="w-full h-full object-cover img-luxury">
+                            <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=800&q=80&auto=format&fit=crop" alt="7-Day Transformation Retreat - Intensive yoga in Goa" class="img-luxury" loading="lazy">
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/50 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                             <div class="text-gold-300 text-xs tracking-[0.3em] uppercase mb-2">7 Days</div>
-                            <h3 class="font-serif text-3xl md:text-4xl text-sand-50 mb-3">Transformation</h3>
-                            <p class="text-sand-300 text-sm leading-relaxed mb-6">A complete metamorphosis. Seven days of intensive practice, silence, nature immersion, and profound inner work.</p>
-                            <div class="flex flex-wrap gap-2 mb-6">
+                            <h3 class="font-serif text-2xl md:text-3xl lg:text-4xl text-sand-50 mb-3">Transformation</h3>
+                            <p class="text-sand-300 text-sm leading-relaxed mb-4 md:mb-6">A complete metamorphosis. Seven days of intensive practice, silence, nature immersion, and profound inner work.</p>
+                            <div class="flex flex-wrap gap-2 mb-4 md:mb-6">
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Intensive Yoga</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Silent Mornings</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Nature Walks</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Wellness Spa</span>
                             </div>
-                            <a href="#apply" class="inline-flex items-center gap-2 text-gold-300 text-xs tracking-[0.2em] uppercase group-hover:gap-4 transition-all">
+                            <a href="#apply" class="inline-flex items-center gap-2 text-gold-300 text-xs tracking-[0.2em] uppercase group-hover:gap-4 transition-all no-select">
                                 Inquire <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -668,22 +685,22 @@
 
                 <!-- 14-Day Immersion -->
                 <div class="retreat-card group">
-                    <div class="relative h-[600px] rounded-2xl overflow-hidden glass-light">
+                    <div class="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden glass-light">
                         <div class="absolute inset-0">
-                            <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=800&q=80" alt="14-Day Immersion" class="w-full h-full object-cover img-luxury">
+                            <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=800&q=80&auto=format&fit=crop" alt="14-Day Immersion Retreat - Complete yoga pilgrimage in Goa" class="img-luxury" loading="lazy">
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/50 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                             <div class="text-gold-300 text-xs tracking-[0.3em] uppercase mb-2">14 Days</div>
-                            <h3 class="font-serif text-3xl md:text-4xl text-sand-50 mb-3">Immersion</h3>
-                            <p class="text-sand-300 text-sm leading-relaxed mb-6">The ultimate pilgrimage. Two weeks of complete immersion into yogic living, teacher guidance, and spiritual exploration.</p>
-                            <div class="flex flex-wrap gap-2 mb-6">
+                            <h3 class="font-serif text-2xl md:text-3xl lg:text-4xl text-sand-50 mb-3">Immersion</h3>
+                            <p class="text-sand-300 text-sm leading-relaxed mb-4 md:mb-6">The ultimate pilgrimage. Two weeks of complete immersion into yogic living, teacher guidance, and spiritual exploration.</p>
+                            <div class="flex flex-wrap gap-2 mb-4 md:mb-6">
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Teacher Training</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Philosophy</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Detox</span>
                                 <span class="px-3 py-1 glass rounded-full text-[10px] tracking-wider uppercase text-sand-300">Excursions</span>
                             </div>
-                            <a href="#apply" class="inline-flex items-center gap-2 text-gold-300 text-xs tracking-[0.2em] uppercase group-hover:gap-4 transition-all">
+                            <a href="#apply" class="inline-flex items-center gap-2 text-gold-300 text-xs tracking-[0.2em] uppercase group-hover:gap-4 transition-all no-select">
                                 Inquire <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -694,70 +711,70 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="relative py-32 px-4 md:px-8">
+    <section id="experience" class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">The Experience</div>
-                <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl text-sand-50 mb-6">A Day in Paradise</h2>
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">The Experience</div>
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-sand-50 mb-4 md:mb-6">A Day in Paradise</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 <!-- Beach Yoga -->
-                <div class="group relative h-[400px] rounded-2xl overflow-hidden glass-light reveal">
-                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" alt="Beach Yoga" class="absolute inset-0 w-full h-full object-cover img-luxury">
+                <div class="group relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden glass-light reveal">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80&auto=format&fit=crop" alt="Beach Yoga at sunrise on Polem Beach Goa" class="absolute inset-0 w-full h-full object-cover img-luxury" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="font-serif text-2xl text-sand-50 mb-2">Beach Yoga</h3>
+                    <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+                        <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-2">Beach Yoga</h3>
                         <p class="text-sand-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">Sunrise and sunset sessions on pristine white sands, synchronized with the rhythm of the tides.</p>
                     </div>
                 </div>
 
                 <!-- Meditation -->
-                <div class="group relative h-[400px] rounded-2xl overflow-hidden glass-light reveal reveal-delay-1">
-                    <img src="https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&q=80" alt="Meditation" class="absolute inset-0 w-full h-full object-cover img-luxury">
+                <div class="group relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden glass-light reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&q=80&auto=format&fit=crop" alt="Guided meditation by the ocean in Goa" class="absolute inset-0 w-full h-full object-cover img-luxury" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="font-serif text-2xl text-sand-50 mb-2">Meditation</h3>
+                    <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+                        <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-2">Meditation</h3>
                         <p class="text-sand-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">Guided ocean meditation and silent contemplation in our open-air shalas overlooking the Arabian Sea.</p>
                     </div>
                 </div>
 
                 <!-- Breathwork -->
-                <div class="group relative h-[400px] rounded-2xl overflow-hidden glass-light reveal reveal-delay-2">
-                    <img src="https://images.unsplash.com/photo-1545389336-cf090694435e?w=600&q=80" alt="Breathwork" class="absolute inset-0 w-full h-full object-cover img-luxury">
+                <div class="group relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden glass-light reveal reveal-delay-2">
+                    <img src="https://images.unsplash.com/photo-1545389336-cf090694435e?w=600&q=80&auto=format&fit=crop" alt="Pranayama breathwork sessions in South Goa" class="absolute inset-0 w-full h-full object-cover img-luxury" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="font-serif text-2xl text-sand-50 mb-2">Breathwork</h3>
+                    <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+                        <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-2">Breathwork</h3>
                         <p class="text-sand-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">Pranayama sessions harnessing the ocean breeze to deepen your breath and expand consciousness.</p>
                     </div>
                 </div>
 
                 <!-- Sound Healing -->
-                <div class="group relative h-[400px] rounded-2xl overflow-hidden glass-light reveal">
-                    <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600&q=80" alt="Sound Healing" class="absolute inset-0 w-full h-full object-cover img-luxury">
+                <div class="group relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden glass-light reveal">
+                    <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600&q=80&auto=format&fit=crop" alt="Sound healing with Tibetan singing bowls in Goa retreat" class="absolute inset-0 w-full h-full object-cover img-luxury" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="font-serif text-2xl text-sand-50 mb-2">Sound Healing</h3>
+                    <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+                        <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-2">Sound Healing</h3>
                         <p class="text-sand-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">Tibetan singing bowls, gongs, and ocean drums creating harmonic frequencies for deep cellular healing.</p>
                     </div>
                 </div>
 
                 <!-- Ayurveda -->
-                <div class="group relative h-[400px] rounded-2xl overflow-hidden glass-light reveal reveal-delay-1">
-                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80" alt="Ayurveda" class="absolute inset-0 w-full h-full object-cover img-luxury">
+                <div class="group relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden glass-light reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80&auto=format&fit=crop" alt="Ayurvedic massage and wellness treatment Goa" class="absolute inset-0 w-full h-full object-cover img-luxury" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="font-serif text-2xl text-sand-50 mb-2">Ayurveda</h3>
+                    <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+                        <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-2">Ayurveda</h3>
                         <p class="text-sand-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">Traditional dosha balancing, Abhyanga massage, and personalized wellness consultations with expert vaidyas.</p>
                     </div>
                 </div>
 
                 <!-- Nature Exploration -->
-                <div class="group relative h-[400px] rounded-2xl overflow-hidden glass-light reveal reveal-delay-2">
-                    <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600&q=80" alt="Nature" class="absolute inset-0 w-full h-full object-cover img-luxury">
+                <div class="group relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden glass-light reveal reveal-delay-2">
+                    <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600&q=80&auto=format&fit=crop" alt="Nature exploration and tropical walks in South Goa" class="absolute inset-0 w-full h-full object-cover img-luxury" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="font-serif text-2xl text-sand-50 mb-2">Nature Exploration</h3>
+                    <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+                        <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-2">Nature Exploration</h3>
                         <p class="text-sand-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">Guided walks through coconut groves, butterfly sanctuaries, and hidden coves of South Goa.</p>
                     </div>
                 </div>
@@ -766,49 +783,49 @@
     </section>
 
     <!-- Accommodation Section -->
-    <section id="accommodation" class="relative py-32 px-4 md:px-8">
+    <section id="accommodation" class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Rest & Restore</div>
-                <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl text-sand-50 mb-6">Accommodation</h2>
-                <p class="max-w-xl mx-auto text-sand-300 font-light leading-relaxed">
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Rest & Restore</div>
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-sand-50 mb-4 md:mb-6">Accommodation</h2>
+                <p class="max-w-xl mx-auto text-sand-300 font-light leading-relaxed text-sm md:text-base px-4">
                     Boutique sanctuaries designed for deep rest. Each space opens to the ocean, garden, or sky.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <!-- Ocean Suite -->
-                <div class="group relative h-[500px] lg:h-[600px] rounded-2xl overflow-hidden reveal">
-                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=80" alt="Ocean Suite" class="absolute inset-0 w-full h-full object-cover img-luxury">
+                <div class="group relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden reveal">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=80&auto=format&fit=crop" alt="Ocean Suite luxury room with panoramic Arabian Sea views" class="absolute inset-0 w-full h-full object-cover img-luxury" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/30 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="px-4 py-2 glass rounded-full text-xs tracking-wider uppercase text-gold-300">Ocean View</span>
+                    <div class="absolute top-4 md:top-6 left-4 md:left-6">
+                        <span class="px-3 md:px-4 py-1.5 md:py-2 glass rounded-full text-xs tracking-wider uppercase text-gold-300">Ocean View</span>
                     </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-8">
-                        <h3 class="font-serif text-3xl md:text-4xl text-sand-50 mb-3">The Ocean Suite</h3>
-                        <p class="text-sand-300 leading-relaxed mb-6 max-w-md">Panoramic Arabian Sea views from your private terrace. King bed, outdoor shower, and sunrise yoga deck.</p>
-                        <div class="flex gap-4 text-sand-300 text-sm">
-                            <span><i class="fas fa-bed mr-2"></i>King Bed</span>
-                            <span><i class="fas fa-water mr-2"></i>Ocean View</span>
-                            <span><i class="fas fa-wifi mr-2"></i>WiFi</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                        <h3 class="font-serif text-2xl md:text-3xl lg:text-4xl text-sand-50 mb-2 md:mb-3">The Ocean Suite</h3>
+                        <p class="text-sand-300 leading-relaxed mb-4 md:mb-6 text-sm md:text-base max-w-md">Panoramic Arabian Sea views from your private terrace. King bed, outdoor shower, and sunrise yoga deck.</p>
+                        <div class="flex flex-wrap gap-3 md:gap-4 text-sand-300 text-xs md:text-sm">
+                            <span class="flex items-center gap-1.5"><i class="fas fa-bed text-gold-300 text-xs"></i>King Bed</span>
+                            <span class="flex items-center gap-1.5"><i class="fas fa-water text-gold-300 text-xs"></i>Ocean View</span>
+                            <span class="flex items-center gap-1.5"><i class="fas fa-wifi text-gold-300 text-xs"></i>WiFi</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Garden Villa -->
-                <div class="group relative h-[500px] lg:h-[600px] rounded-2xl overflow-hidden reveal reveal-delay-1">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1000&q=80" alt="Garden Villa" class="absolute inset-0 w-full h-full object-cover img-luxury">
+                <div class="group relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1000&q=80&auto=format&fit=crop" alt="Garden Villa surrounded by tropical gardens and banyan trees" class="absolute inset-0 w-full h-full object-cover img-luxury" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-950 via-deep-950/30 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="px-4 py-2 glass rounded-full text-xs tracking-wider uppercase text-gold-300">Garden View</span>
+                    <div class="absolute top-4 md:top-6 left-4 md:left-6">
+                        <span class="px-3 md:px-4 py-1.5 md:py-2 glass rounded-full text-xs tracking-wider uppercase text-gold-300">Garden View</span>
                     </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-8">
-                        <h3 class="font-serif text-3xl md:text-4xl text-sand-50 mb-3">The Garden Villa</h3>
-                        <p class="text-sand-300 leading-relaxed mb-6 max-w-md">Surrounded by tropical gardens and ancient banyan trees. Private courtyard, hammock, and open-air bathroom.</p>
-                        <div class="flex gap-4 text-sand-300 text-sm">
-                            <span><i class="fas fa-bed mr-2"></i>Queen Bed</span>
-                            <span><i class="fas fa-leaf mr-2"></i>Garden</span>
-                            <span><i class="fas fa-wifi mr-2"></i>WiFi</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                        <h3 class="font-serif text-2xl md:text-3xl lg:text-4xl text-sand-50 mb-2 md:mb-3">The Garden Villa</h3>
+                        <p class="text-sand-300 leading-relaxed mb-4 md:mb-6 text-sm md:text-base max-w-md">Surrounded by tropical gardens and ancient banyan trees. Private courtyard, hammock, and open-air bathroom.</p>
+                        <div class="flex flex-wrap gap-3 md:gap-4 text-sand-300 text-xs md:text-sm">
+                            <span class="flex items-center gap-1.5"><i class="fas fa-bed text-gold-300 text-xs"></i>Queen Bed</span>
+                            <span class="flex items-center gap-1.5"><i class="fas fa-leaf text-gold-300 text-xs"></i>Garden</span>
+                            <span class="flex items-center gap-1.5"><i class="fas fa-wifi text-gold-300 text-xs"></i>WiFi</span>
                         </div>
                     </div>
                 </div>
@@ -817,91 +834,100 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="relative py-32 px-4 md:px-8">
+    <section id="gallery" class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Visual Journey</div>
-                <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl text-sand-50 mb-6">Gallery</h2>
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Visual Journey</div>
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-sand-50 mb-4 md:mb-6">Gallery</h2>
             </div>
 
             <div class="masonry-grid">
                 <div class="masonry-item reveal" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Polem Beach" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80&auto=format&fit=crop" alt="Polem Beach pristine white sand shoreline Goa" loading="lazy">
                 </div>
                 <div class="masonry-item reveal reveal-delay-1" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80" alt="Yoga Session" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80&auto=format&fit=crop" alt="Yoga practice session by the beach at sunset" loading="lazy">
                 </div>
                 <div class="masonry-item reveal reveal-delay-2" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600&q=80" alt="Sound Healing" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600&q=80&auto=format&fit=crop" alt="Sound healing ceremony with singing bowls" loading="lazy">
                 </div>
                 <div class="masonry-item reveal" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=600&q=80" alt="Sunrise" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=600&q=80&auto=format&fit=crop" alt="Golden sunrise over the Arabian Sea" loading="lazy">
                 </div>
                 <div class="masonry-item reveal reveal-delay-1" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" alt="Wellness" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80&auto=format&fit=crop" alt="Wellness and spa relaxation therapy" loading="lazy">
                 </div>
                 <div class="masonry-item reveal reveal-delay-2" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Community" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80&auto=format&fit=crop" alt="Community gathering and group meditation circle" loading="lazy">
                 </div>
                 <div class="masonry-item reveal" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1516815231560-8f41ec531527?w=600&q=80" alt="Nature" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1516815231560-8f41ec531527?w=600&q=80&auto=format&fit=crop" alt="Tropical nature and palm trees in Goa" loading="lazy">
                 </div>
                 <div class="masonry-item reveal reveal-delay-1" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80" alt="Ayurveda" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80&auto=format&fit=crop" alt="Ayurvedic treatment and traditional wellness" loading="lazy">
                 </div>
                 <div class="masonry-item reveal reveal-delay-2" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80" alt="Accommodation" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80&auto=format&fit=crop" alt="Luxury accommodation interior with ocean view" loading="lazy">
+                </div>
+                <div class="masonry-item reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=600&q=80&auto=format&fit=crop" alt="Sunset yoga silhouette on the beach" loading="lazy">
+                </div>
+                <div class="masonry-item reveal reveal-delay-1" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=600&q=80&auto=format&fit=crop" alt="Woman meditating in peaceful natural setting" loading="lazy">
+                </div>
+                <div class="masonry-item reveal reveal-delay-2" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80&auto=format&fit=crop" alt="Luxury resort pool and tropical garden" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section class="relative py-32 px-4 md:px-8">
+    <section class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Guest Stories</div>
-                <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl text-sand-50 mb-6">Transformations</h2>
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Guest Stories</div>
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-sand-50 mb-4 md:mb-6">Transformations</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="testimonial-card glass-light rounded-2xl p-8 reveal">
-                    <div class="flex gap-1 text-gold-300 text-xs mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <div class="testimonial-card glass-light rounded-2xl p-6 md:p-8 reveal">
+                    <div class="flex gap-1 text-gold-300 text-xs mb-4 md:mb-6">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <p class="text-sand-200 leading-relaxed mb-6 italic">"I arrived exhausted and left reborn. The 7-day transformation retreat changed my relationship with myself. The beach yoga at sunrise is something I will carry in my heart forever."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-300 to-gold-500 flex items-center justify-center text-deep-950 font-serif font-bold">S</div>
+                    <p class="text-sand-200 leading-relaxed mb-4 md:mb-6 italic text-sm md:text-base">"I arrived exhausted and left reborn. The 7-day transformation retreat changed my relationship with myself. The beach yoga at sunrise is something I will carry in my heart forever."</p>
+                    <div class="flex items-center gap-3 md:gap-4">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-gold-300 to-gold-500 flex items-center justify-center text-deep-950 font-serif font-bold text-sm md:text-base">S</div>
                         <div>
-                            <div class="text-sand-100 font-medium">Sarah Mitchell</div>
+                            <div class="text-sand-100 font-medium text-sm md:text-base">Sarah Mitchell</div>
                             <div class="text-sand-400 text-xs">London, UK · 7-Day Transformation</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="testimonial-card glass-light rounded-2xl p-8 reveal reveal-delay-1">
-                    <div class="flex gap-1 text-gold-300 text-xs mb-6">
+                <div class="testimonial-card glass-light rounded-2xl p-6 md:p-8 reveal reveal-delay-1">
+                    <div class="flex gap-1 text-gold-300 text-xs mb-4 md:mb-6">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <p class="text-sand-200 leading-relaxed mb-6 italic">"Polem Beach Yoga is not just a retreat—it's a portal to another dimension of living. The attention to detail, the food, the teachers, the energy... everything is pure magic."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-300 to-gold-500 flex items-center justify-center text-deep-950 font-serif font-bold">M</div>
+                    <p class="text-sand-200 leading-relaxed mb-4 md:mb-6 italic text-sm md:text-base">"Polem Beach Yoga is not just a retreat—it's a portal to another dimension of living. The attention to detail, the food, the teachers, the energy... everything is pure magic."</p>
+                    <div class="flex items-center gap-3 md:gap-4">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-gold-300 to-gold-500 flex items-center justify-center text-deep-950 font-serif font-bold text-sm md:text-base">M</div>
                         <div>
-                            <div class="text-sand-100 font-medium">Marcus Chen</div>
+                            <div class="text-sand-100 font-medium text-sm md:text-base">Marcus Chen</div>
                             <div class="text-sand-400 text-xs">Singapore · 14-Day Immersion</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="testimonial-card glass-light rounded-2xl p-8 reveal reveal-delay-2">
-                    <div class="flex gap-1 text-gold-300 text-xs mb-6">
+                <div class="testimonial-card glass-light rounded-2xl p-6 md:p-8 reveal reveal-delay-2">
+                    <div class="flex gap-1 text-gold-300 text-xs mb-4 md:mb-6">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <p class="text-sand-200 leading-relaxed mb-6 italic">"The perfect weekend escape from Mumbai. Just two nights and I felt completely reset. The sound healing session under the stars was the highlight of my year."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-300 to-gold-500 flex items-center justify-center text-deep-950 font-serif font-bold">P</div>
+                    <p class="text-sand-200 leading-relaxed mb-4 md:mb-6 italic text-sm md:text-base">"The perfect weekend escape from Mumbai. Just two nights and I felt completely reset. The sound healing session under the stars was the highlight of my year."</p>
+                    <div class="flex items-center gap-3 md:gap-4">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-gold-300 to-gold-500 flex items-center justify-center text-deep-950 font-serif font-bold text-sm md:text-base">P</div>
                         <div>
-                            <div class="text-sand-100 font-medium">Priya Sharma</div>
+                            <div class="text-sand-100 font-medium text-sm md:text-base">Priya Sharma</div>
                             <div class="text-sand-400 text-xs">Mumbai, India · Weekend Escape</div>
                         </div>
                     </div>
@@ -911,38 +937,38 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="relative py-32 px-4 md:px-8">
+    <section id="about" class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="reveal">
-                    <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Our Story</div>
-                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-sand-50 mb-8 leading-tight">Where the Ocean<br>Meets the Soul</h2>
-                    <div class="space-y-6 text-sand-300 leading-relaxed font-light">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+                <div class="reveal order-2 lg:order-1">
+                    <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Our Story</div>
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-sand-50 mb-6 md:mb-8 leading-tight">Where the Ocean<br>Meets the Soul</h2>
+                    <div class="space-y-4 md:space-y-6 text-sand-300 leading-relaxed font-light text-sm md:text-base">
                         <p>Polem Beach Yoga was born from a simple belief: that the ocean has the power to heal, and yoga has the power to transform. Nestled on the secluded southern shores of Goa, our sanctuary offers an escape from the noise of modern life.</p>
                         <p>Founded by a collective of master yoga teachers, Ayurvedic practitioners, and hospitality visionaries, we have created a space where ancient wisdom meets contemporary luxury. Every detail—from the organic meals to the handwoven textiles—has been chosen to support your journey inward.</p>
                         <p>We host only 12 guests at a time, ensuring personalized attention and an intimate community atmosphere. This is not a resort. This is a pilgrimage to your truest self.</p>
                     </div>
-                    <div class="mt-10 flex gap-8">
+                    <div class="mt-8 md:mt-10 flex gap-6 md:gap-8">
                         <div>
-                            <div class="font-serif text-4xl text-gold-300 number-display">12</div>
+                            <div class="font-serif text-3xl md:text-4xl text-gold-300 number-display">12</div>
                             <div class="text-sand-400 text-xs tracking-wider uppercase mt-1">Guests Max</div>
                         </div>
                         <div>
-                            <div class="font-serif text-4xl text-gold-300 number-display">8+</div>
+                            <div class="font-serif text-3xl md:text-4xl text-gold-300 number-display">8+</div>
                             <div class="text-sand-400 text-xs tracking-wider uppercase mt-1">Years Active</div>
                         </div>
                         <div>
-                            <div class="font-serif text-4xl text-gold-300 number-display">500+</div>
+                            <div class="font-serif text-3xl md:text-4xl text-gold-300 number-display">500+</div>
                             <div class="text-sand-400 text-xs tracking-wider uppercase mt-1">Transformations</div>
                         </div>
                     </div>
                 </div>
-                <div class="relative reveal reveal-delay-2">
+                <div class="relative reveal reveal-delay-2 order-1 lg:order-2">
                     <div class="relative rounded-2xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&q=80" alt="About Polem Beach Yoga" class="w-full h-[600px] object-cover">
+                        <img src="https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&q=80&auto=format&fit=crop" alt="About Polem Beach Yoga - peaceful meditation space" class="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover" loading="lazy">
                     </div>
-                    <div class="absolute -bottom-8 -left-8 w-48 h-48 rounded-2xl overflow-hidden border-4 border-deep-950 hidden md:block">
-                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80" alt="Yoga Detail" class="w-full h-full object-cover">
+                    <div class="absolute -bottom-6 -left-4 md:-bottom-8 md:-left-8 w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden border-4 border-deep-950 hidden sm:block">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80&auto=format&fit=crop" alt="Yoga practice detail" class="w-full h-full object-cover" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -950,62 +976,63 @@
     </section>
 
     <!-- Directions Section -->
-    <section id="directions" class="relative py-32 px-4 md:px-8">
+    <section id="directions" class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Find Us</div>
-                <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl text-sand-50 mb-6">Directions</h2>
-                <p class="max-w-xl mx-auto text-sand-300 font-light leading-relaxed">
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Find Us</div>
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-sand-50 mb-4 md:mb-6">Directions</h2>
+                <p class="max-w-xl mx-auto text-sand-300 font-light leading-relaxed text-sm md:text-base px-4">
                     Located on the pristine shores of Polem Beach, Canacona, South Goa.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-                <div class="glass-light rounded-2xl p-8 reveal">
-                    <div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
+                <div class="glass-light rounded-2xl p-6 md:p-8 reveal">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gold-400/10 flex items-center justify-center mb-4 md:mb-6">
                         <i class="fas fa-plane text-gold-300"></i>
                     </div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-3">By Air</h3>
-                    <p class="text-sand-300 text-sm leading-relaxed mb-4">Goa International Airport (GOI) is 65km away. We arrange private transfers upon request.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-2 md:mb-3">By Air</h3>
+                    <p class="text-sand-300 text-sm leading-relaxed mb-3 md:mb-4">Goa International Airport (GOI) is 65km away. We arrange private transfers upon request.</p>
                     <div class="text-gold-300 text-xs tracking-wider uppercase">~90 Minutes</div>
                 </div>
 
-                <div class="glass-light rounded-2xl p-8 reveal reveal-delay-1">
-                    <div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center mb-6">
+                <div class="glass-light rounded-2xl p-6 md:p-8 reveal reveal-delay-1">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gold-400/10 flex items-center justify-center mb-4 md:mb-6">
                         <i class="fas fa-train text-gold-300"></i>
                     </div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-3">By Rail</h3>
-                    <p class="text-sand-300 text-sm leading-relaxed mb-4">Canacona Railway Station is just 3km from our retreat. Auto-rickshaws and taxis are readily available.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-2 md:mb-3">By Rail</h3>
+                    <p class="text-sand-300 text-sm leading-relaxed mb-3 md:mb-4">Canacona Railway Station is just 3km from our retreat. Auto-rickshaws and taxis are readily available.</p>
                     <div class="text-gold-300 text-xs tracking-wider uppercase">~10 Minutes</div>
                 </div>
 
-                <div class="glass-light rounded-2xl p-8 reveal reveal-delay-2">
-                    <div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center mb-6">
+                <div class="glass-light rounded-2xl p-6 md:p-8 reveal reveal-delay-2">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gold-400/10 flex items-center justify-center mb-4 md:mb-6">
                         <i class="fas fa-car text-gold-300"></i>
                     </div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-3">By Road</h3>
-                    <p class="text-sand-300 text-sm leading-relaxed mb-4">Follow NH66 to Canacona, then take the coastal road toward Polem Beach. Ample parking available.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-2 md:mb-3">By Road</h3>
+                    <p class="text-sand-300 text-sm leading-relaxed mb-3 md:mb-4">Follow NH66 to Canacona, then take the coastal road toward Polem Beach. Ample parking available.</p>
                     <div class="text-gold-300 text-xs tracking-wider uppercase">Scenic Route</div>
                 </div>
             </div>
 
             <div class="glass-light rounded-2xl overflow-hidden reveal">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.374157965264!2d74.0417!3d14.9833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDU4JzYwLjAiTiA3NMKwMDInMzAuMCJF!5e0!3m2!1sen!2sin!4v1" 
-                    width="100%" 
-                    height="450" 
-                    style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                <div class="relative w-full" style="padding-bottom: 56.25%;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.374157965264!2d74.0417!3d14.9833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDU4JzYwLjAiTiA3NMKwMDInMzAuMCJF!5e0!3m2!1sen!2sin!4v1" 
+                        class="absolute inset-0 w-full h-full"
+                        style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </div>
 
-            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center reveal">
-                <a href="https://www.google.com/maps/dir//Polem+Beach,+Goa" target="_blank" class="btn-luxury inline-flex items-center justify-center gap-2 px-8 py-4 glass-light text-sand-100 rounded-full text-xs tracking-[0.2em] uppercase">
+            <div class="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center reveal">
+                <a href="https://www.google.com/maps/dir//Polem+Beach,+Goa" target="_blank" rel="noopener noreferrer" class="btn-luxury inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 glass-light text-sand-100 rounded-full text-xs tracking-[0.2em] uppercase no-select">
                     <i class="fas fa-map-marker-alt"></i> Open in Maps
                 </a>
-                <a href="https://wa.me/919876543210?text=Hello%20Polem%20Beach%20Yoga%20Team,%20I%20need%20directions%20assistance." target="_blank" class="btn-luxury inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600/20 border border-green-500/30 text-green-400 rounded-full text-xs tracking-[0.2em] uppercase">
+                <a href="https://wa.me/919876543210?text=Hello%20Polem%20Beach%20Yoga%20Team,%20I%20need%20directions%20assistance." target="_blank" rel="noopener noreferrer" class="btn-luxury inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-green-600/20 border border-green-500/30 text-green-400 rounded-full text-xs tracking-[0.2em] uppercase no-select">
                     <i class="fab fa-whatsapp"></i> WhatsApp Assistance
                 </a>
             </div>
@@ -1013,98 +1040,98 @@
     </section>
 
     <!-- Apply Now Section -->
-    <section id="apply" class="relative py-32 px-4 md:px-8">
+    <section id="apply" class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Reserve Your Journey</div>
-                <h2 class="font-serif text-4xl md:text-6xl text-sand-50 mb-6">Apply Now</h2>
-                <p class="text-sand-300 font-light">Complete the form below and our concierge team will contact you within 24 hours.</p>
+            <div class="text-center mb-10 md:mb-16 reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Reserve Your Journey</div>
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-sand-50 mb-4 md:mb-6">Apply Now</h2>
+                <p class="text-sand-300 font-light text-sm md:text-base px-4">Complete the form below and our concierge team will contact you within 24 hours.</p>
             </div>
 
             <!-- Step Indicator -->
-            <div class="flex items-center justify-center gap-4 mb-12 reveal">
-                <div class="flex items-center gap-2">
-                    <div class="step-dot active w-3 h-3 rounded-full bg-sand-600" id="dot1"></div>
+            <div class="flex items-center justify-center gap-2 md:gap-4 mb-8 md:mb-12 reveal overflow-x-auto px-2">
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <div class="step-dot active" id="dot1"></div>
                     <span class="text-[10px] tracking-wider uppercase text-sand-400 hidden sm:block" id="label1">Personal</span>
                 </div>
-                <div class="step-line w-12 h-px bg-sand-700" id="line1"></div>
-                <div class="flex items-center gap-2">
-                    <div class="step-dot w-3 h-3 rounded-full bg-sand-600" id="dot2"></div>
+                <div class="step-line" id="line1"></div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <div class="step-dot" id="dot2"></div>
                     <span class="text-[10px] tracking-wider uppercase text-sand-400 hidden sm:block" id="label2">Retreat</span>
                 </div>
-                <div class="step-line w-12 h-px bg-sand-700" id="line2"></div>
-                <div class="flex items-center gap-2">
-                    <div class="step-dot w-3 h-3 rounded-full bg-sand-600" id="dot3"></div>
+                <div class="step-line" id="line2"></div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <div class="step-dot" id="dot3"></div>
                     <span class="text-[10px] tracking-wider uppercase text-sand-400 hidden sm:block" id="label3">Dates</span>
                 </div>
-                <div class="step-line w-12 h-px bg-sand-700" id="line3"></div>
-                <div class="flex items-center gap-2">
-                    <div class="step-dot w-3 h-3 rounded-full bg-sand-600" id="dot4"></div>
+                <div class="step-line" id="line3"></div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <div class="step-dot" id="dot4"></div>
                     <span class="text-[10px] tracking-wider uppercase text-sand-400 hidden sm:block" id="label4">Details</span>
                 </div>
-                <div class="step-line w-12 h-px bg-sand-700" id="line4"></div>
-                <div class="flex items-center gap-2">
-                    <div class="step-dot w-3 h-3 rounded-full bg-sand-600" id="dot5"></div>
+                <div class="step-line" id="line4"></div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <div class="step-dot" id="dot5"></div>
                     <span class="text-[10px] tracking-wider uppercase text-sand-400 hidden sm:block" id="label5">Confirm</span>
                 </div>
             </div>
 
-            <form id="bookingForm" class="glass-light rounded-2xl p-8 md:p-12 reveal">
+            <form id="bookingForm" class="glass-light rounded-2xl p-6 md:p-10 lg:p-12 reveal" onsubmit="return false;">
                 <!-- Step 1: Personal Information -->
                 <div id="step1" class="step-content">
-                    <h3 class="font-serif text-2xl text-sand-50 mb-8">Personal Information</h3>
-                    <div class="space-y-6">
+                    <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-6 md:mb-8">Personal Information</h3>
+                    <div class="space-y-4 md:space-y-6">
                         <div>
-                            <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Full Name</label>
-                            <input type="text" id="fullName" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" placeholder="Your full name" required>
+                            <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Full Name *</label>
+                            <input type="text" id="fullName" class="input-luxury" placeholder="Your full name" required>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
-                                <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Email</label>
-                                <input type="email" id="email" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" placeholder="your@email.com" required>
+                                <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Email *</label>
+                                <input type="email" id="email" class="input-luxury" placeholder="your@email.com" required>
                             </div>
                             <div>
-                                <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">WhatsApp Number</label>
-                                <input type="tel" id="whatsapp" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" placeholder="+91 98765 43210" required>
+                                <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">WhatsApp Number *</label>
+                                <input type="tel" id="whatsapp" class="input-luxury" placeholder="+91 98765 43210" required>
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Country</label>
-                            <input type="text" id="country" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" placeholder="Your country" required>
+                            <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Country *</label>
+                            <input type="text" id="country" class="input-luxury" placeholder="Your country" required>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 2: Retreat Selection -->
                 <div id="step2" class="step-content hidden">
-                    <h3 class="font-serif text-2xl text-sand-50 mb-8">Select Your Retreat</h3>
-                    <div class="space-y-4">
-                        <label class="flex items-center gap-4 p-4 glass rounded-xl cursor-pointer hover:border-gold-400/30 transition-colors border border-transparent">
-                            <input type="radio" name="retreat" value="Weekend Escape" class="accent-gold-400">
+                    <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-6 md:mb-8">Select Your Retreat</h3>
+                    <div class="space-y-3 md:space-y-4">
+                        <label class="retreat-option flex items-center gap-3 md:gap-4 p-3 md:p-4 glass rounded-xl cursor-pointer hover:border-gold-400/30 transition-colors border border-transparent no-select">
+                            <input type="radio" name="retreat" value="Weekend Escape" class="accent-gold-400 w-4 h-4 flex-shrink-0">
                             <div>
-                                <div class="text-sand-100 font-medium">Weekend Escape</div>
-                                <div class="text-sand-400 text-sm">2 Nights · Introductory</div>
+                                <div class="text-sand-100 font-medium text-sm md:text-base">Weekend Escape</div>
+                                <div class="text-sand-400 text-xs md:text-sm">2 Nights · Introductory</div>
                             </div>
                         </label>
-                        <label class="flex items-center gap-4 p-4 glass rounded-xl cursor-pointer hover:border-gold-400/30 transition-colors border border-transparent">
-                            <input type="radio" name="retreat" value="5-Day Wellness Retreat" class="accent-gold-400">
+                        <label class="retreat-option flex items-center gap-3 md:gap-4 p-3 md:p-4 glass rounded-xl cursor-pointer hover:border-gold-400/30 transition-colors border border-transparent no-select">
+                            <input type="radio" name="retreat" value="5-Day Wellness Retreat" class="accent-gold-400 w-4 h-4 flex-shrink-0">
                             <div>
-                                <div class="text-sand-100 font-medium">5-Day Wellness Retreat</div>
-                                <div class="text-sand-400 text-sm">5 Days · Holistic Wellness</div>
+                                <div class="text-sand-100 font-medium text-sm md:text-base">5-Day Wellness Retreat</div>
+                                <div class="text-sand-400 text-xs md:text-sm">5 Days · Holistic Wellness</div>
                             </div>
                         </label>
-                        <label class="flex items-center gap-4 p-4 glass rounded-xl cursor-pointer hover:border-gold-400/30 transition-colors border border-transparent">
-                            <input type="radio" name="retreat" value="7-Day Transformation Retreat" class="accent-gold-400" checked>
+                        <label class="retreat-option flex items-center gap-3 md:gap-4 p-3 md:p-4 glass rounded-xl cursor-pointer hover:border-gold-400/30 transition-colors border border-transparent no-select">
+                            <input type="radio" name="retreat" value="7-Day Transformation Retreat" class="accent-gold-400 w-4 h-4 flex-shrink-0" checked>
                             <div>
-                                <div class="text-sand-100 font-medium">7-Day Transformation Retreat</div>
-                                <div class="text-sand-400 text-sm">7 Days · Most Popular</div>
+                                <div class="text-sand-100 font-medium text-sm md:text-base">7-Day Transformation Retreat</div>
+                                <div class="text-sand-400 text-xs md:text-sm">7 Days · Most Popular</div>
                             </div>
                         </label>
-                        <label class="flex items-center gap-4 p-4 glass rounded-xl cursor-pointer hover:border-gold-400/30 transition-colors border border-transparent">
-                            <input type="radio" name="retreat" value="14-Day Immersion Retreat" class="accent-gold-400">
+                        <label class="retreat-option flex items-center gap-3 md:gap-4 p-3 md:p-4 glass rounded-xl cursor-pointer hover:border-gold-400/30 transition-colors border border-transparent no-select">
+                            <input type="radio" name="retreat" value="14-Day Immersion Retreat" class="accent-gold-400 w-4 h-4 flex-shrink-0">
                             <div>
-                                <div class="text-sand-100 font-medium">14-Day Immersion Retreat</div>
-                                <div class="text-sand-400 text-sm">14 Days · Complete Immersion</div>
+                                <div class="text-sand-100 font-medium text-sm md:text-base">14-Day Immersion Retreat</div>
+                                <div class="text-sand-400 text-xs md:text-sm">14 Days · Complete Immersion</div>
                             </div>
                         </label>
                     </div>
@@ -1112,21 +1139,21 @@
 
                 <!-- Step 3: Travel Dates -->
                 <div id="step3" class="step-content hidden">
-                    <h3 class="font-serif text-2xl text-sand-50 mb-8">Travel Dates</h3>
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-6 md:mb-8">Travel Dates</h3>
+                    <div class="space-y-4 md:space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
-                                <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Arrival Date</label>
-                                <input type="date" id="arrivalDate" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" required>
+                                <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Arrival Date *</label>
+                                <input type="date" id="arrivalDate" class="input-luxury" required>
                             </div>
                             <div>
-                                <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Departure Date</label>
-                                <input type="date" id="departureDate" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" required>
+                                <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Departure Date *</label>
+                                <input type="date" id="departureDate" class="input-luxury" required>
                             </div>
                         </div>
                         <div>
                             <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Number of Guests</label>
-                            <select id="guests" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100">
+                            <select id="guests" class="input-luxury">
                                 <option value="1">1 Guest</option>
                                 <option value="2">2 Guests</option>
                                 <option value="3">3 Guests</option>
@@ -1139,28 +1166,28 @@
 
                 <!-- Step 4: Requirements -->
                 <div id="step4" class="step-content hidden">
-                    <h3 class="font-serif text-2xl text-sand-50 mb-8">Special Requirements</h3>
-                    <div class="space-y-6">
+                    <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-6 md:mb-8">Special Requirements</h3>
+                    <div class="space-y-4 md:space-y-6">
                         <div>
-                            <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Dietary Preferences</label>
-                            <div class="flex flex-wrap gap-3">
-                                <label class="flex items-center gap-2 px-4 py-2 glass rounded-full cursor-pointer text-sm">
+                            <label class="block text-xs tracking-wider uppercase text-sand-400 mb-3">Dietary Preferences</label>
+                            <div class="flex flex-wrap gap-2 md:gap-3">
+                                <label class="flex items-center gap-2 px-3 md:px-4 py-2 glass rounded-full cursor-pointer text-xs md:text-sm no-select">
                                     <input type="checkbox" name="diet" value="Vegetarian" class="accent-gold-400"> Vegetarian
                                 </label>
-                                <label class="flex items-center gap-2 px-4 py-2 glass rounded-full cursor-pointer text-sm">
+                                <label class="flex items-center gap-2 px-3 md:px-4 py-2 glass rounded-full cursor-pointer text-xs md:text-sm no-select">
                                     <input type="checkbox" name="diet" value="Vegan" class="accent-gold-400"> Vegan
                                 </label>
-                                <label class="flex items-center gap-2 px-4 py-2 glass rounded-full cursor-pointer text-sm">
+                                <label class="flex items-center gap-2 px-3 md:px-4 py-2 glass rounded-full cursor-pointer text-xs md:text-sm no-select">
                                     <input type="checkbox" name="diet" value="Gluten-Free" class="accent-gold-400"> Gluten-Free
                                 </label>
-                                <label class="flex items-center gap-2 px-4 py-2 glass rounded-full cursor-pointer text-sm">
+                                <label class="flex items-center gap-2 px-3 md:px-4 py-2 glass rounded-full cursor-pointer text-xs md:text-sm no-select">
                                     <input type="checkbox" name="diet" value="Jain" class="accent-gold-400"> Jain
                                 </label>
                             </div>
                         </div>
                         <div>
                             <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Room Preference</label>
-                            <select id="room" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100">
+                            <select id="room" class="input-luxury">
                                 <option value="Ocean Suite">Ocean Suite</option>
                                 <option value="Garden Villa">Garden Villa</option>
                                 <option value="No Preference">No Preference</option>
@@ -1168,66 +1195,66 @@
                         </div>
                         <div>
                             <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Additional Requirements</label>
-                            <textarea id="requirements" rows="4" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100 resize-none" placeholder="Any medical conditions, mobility needs, or special requests..."></textarea>
+                            <textarea id="requirements" rows="4" class="input-luxury resize-none" placeholder="Any medical conditions, mobility needs, or special requests..."></textarea>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 5: Confirmation -->
                 <div id="step5" class="step-content hidden">
-                    <h3 class="font-serif text-2xl text-sand-50 mb-8">Review Your Application</h3>
-                    <div class="glass rounded-xl p-6 space-y-4 text-sm">
-                        <div class="flex justify-between border-b border-sand-800 pb-3">
+                    <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-6 md:mb-8">Review Your Application</h3>
+                    <div class="glass rounded-xl p-4 md:p-6 space-y-3 md:space-y-4 text-xs md:text-sm">
+                        <div class="flex justify-between border-b border-sand-800 pb-2 md:pb-3">
                             <span class="text-sand-400">Name</span>
-                            <span class="text-sand-100" id="confirmName">-</span>
+                            <span class="text-sand-100 text-right ml-4" id="confirmName">-</span>
                         </div>
-                        <div class="flex justify-between border-b border-sand-800 pb-3">
+                        <div class="flex justify-between border-b border-sand-800 pb-2 md:pb-3">
                             <span class="text-sand-400">Country</span>
-                            <span class="text-sand-100" id="confirmCountry">-</span>
+                            <span class="text-sand-100 text-right ml-4" id="confirmCountry">-</span>
                         </div>
-                        <div class="flex justify-between border-b border-sand-800 pb-3">
+                        <div class="flex justify-between border-b border-sand-800 pb-2 md:pb-3">
                             <span class="text-sand-400">WhatsApp</span>
-                            <span class="text-sand-100" id="confirmWhatsapp">-</span>
+                            <span class="text-sand-100 text-right ml-4" id="confirmWhatsapp">-</span>
                         </div>
-                        <div class="flex justify-between border-b border-sand-800 pb-3">
+                        <div class="flex justify-between border-b border-sand-800 pb-2 md:pb-3">
                             <span class="text-sand-400">Retreat</span>
-                            <span class="text-sand-100" id="confirmRetreat">-</span>
+                            <span class="text-sand-100 text-right ml-4" id="confirmRetreat">-</span>
                         </div>
-                        <div class="flex justify-between border-b border-sand-800 pb-3">
+                        <div class="flex justify-between border-b border-sand-800 pb-2 md:pb-3">
                             <span class="text-sand-400">Arrival</span>
-                            <span class="text-sand-100" id="confirmArrival">-</span>
+                            <span class="text-sand-100 text-right ml-4" id="confirmArrival">-</span>
                         </div>
-                        <div class="flex justify-between border-b border-sand-800 pb-3">
+                        <div class="flex justify-between border-b border-sand-800 pb-2 md:pb-3">
                             <span class="text-sand-400">Departure</span>
-                            <span class="text-sand-100" id="confirmDeparture">-</span>
+                            <span class="text-sand-100 text-right ml-4" id="confirmDeparture">-</span>
                         </div>
-                        <div class="flex justify-between border-b border-sand-800 pb-3">
+                        <div class="flex justify-between border-b border-sand-800 pb-2 md:pb-3">
                             <span class="text-sand-400">Guests</span>
-                            <span class="text-sand-100" id="confirmGuests">-</span>
+                            <span class="text-sand-100 text-right ml-4" id="confirmGuests">-</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sand-400">Room</span>
-                            <span class="text-sand-100" id="confirmRoom">-</span>
+                            <span class="text-sand-100 text-right ml-4" id="confirmRoom">-</span>
                         </div>
                     </div>
-                    <div class="mt-6 p-4 glass rounded-xl">
-                        <label class="flex items-start gap-3 cursor-pointer">
-                            <input type="checkbox" id="termsCheck" class="accent-gold-400 mt-1" required>
-                            <span class="text-sand-300 text-sm">I agree to the <a href="#terms" class="text-gold-300 underline">Terms & Conditions</a>, <a href="#privacy" class="text-gold-300 underline">Privacy Policy</a>, and <a href="#medical" class="text-gold-300 underline">Medical Disclaimer</a>.</span>
+                    <div class="mt-4 md:mt-6 p-3 md:p-4 glass rounded-xl">
+                        <label class="flex items-start gap-3 cursor-pointer no-select">
+                            <input type="checkbox" id="termsCheck" class="accent-gold-400 mt-0.5 flex-shrink-0" required>
+                            <span class="text-sand-300 text-xs md:text-sm">I agree to the <a href="#terms" class="text-gold-300 underline">Terms & Conditions</a>, <a href="#privacy" class="text-gold-300 underline">Privacy Policy</a>, and <a href="#medical" class="text-gold-300 underline">Medical Disclaimer</a>.</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Navigation Buttons -->
-                <div class="flex justify-between mt-10">
-                    <button type="button" id="prevBtn" class="hidden px-6 py-3 text-sand-400 text-xs tracking-[0.2em] uppercase hover:text-sand-100 transition-colors" onclick="changeStep(-1)">
+                <div class="flex justify-between mt-8 md:mt-10">
+                    <button type="button" id="prevBtn" class="hidden px-4 md:px-6 py-2.5 md:py-3 text-sand-400 text-xs tracking-[0.2em] uppercase hover:text-sand-100 transition-colors no-select" onclick="changeStep(-1)">
                         <i class="fas fa-arrow-left mr-2"></i> Back
                     </button>
                     <div class="flex-1"></div>
-                    <button type="button" id="nextBtn" class="btn-luxury px-8 py-3 bg-gold-400 text-deep-950 rounded-full text-xs tracking-[0.2em] uppercase font-medium" onclick="changeStep(1)">
+                    <button type="button" id="nextBtn" class="btn-luxury px-6 md:px-8 py-3 md:py-3.5 bg-gold-400 text-deep-950 rounded-full text-xs tracking-[0.2em] uppercase font-medium no-select" onclick="changeStep(1)">
                         Continue <i class="fas fa-arrow-right ml-2"></i>
                     </button>
-                    <button type="submit" id="submitBtn" class="hidden btn-luxury px-8 py-3 bg-gold-400 text-deep-950 rounded-full text-xs tracking-[0.2em] uppercase font-medium">
+                    <button type="button" id="submitBtn" class="hidden btn-luxury px-6 md:px-8 py-3 md:py-3.5 bg-gold-400 text-deep-950 rounded-full text-xs tracking-[0.2em] uppercase font-medium no-select" onclick="submitApplication()">
                         Submit Application
                     </button>
                 </div>
@@ -1236,82 +1263,82 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="relative py-32 px-4 md:px-8">
+    <section id="contact" class="relative py-20 md:py-32 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
                 <div class="reveal">
-                    <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Get in Touch</div>
-                    <h2 class="font-serif text-4xl md:text-5xl text-sand-50 mb-8">Begin the Conversation</h2>
-                    <p class="text-sand-300 leading-relaxed mb-12">Whether you have questions about our retreats, need travel assistance, or simply want to say hello, our concierge team is here for you.</p>
+                    <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Get in Touch</div>
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-sand-50 mb-6 md:mb-8">Begin the Conversation</h2>
+                    <p class="text-sand-300 leading-relaxed mb-8 md:mb-12 text-sm md:text-base">Whether you have questions about our retreats, need travel assistance, or simply want to say hello, our concierge team is here for you.</p>
 
-                    <div class="space-y-8">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-envelope text-gold-300"></i>
+                    <div class="space-y-6 md:space-y-8">
+                        <div class="flex items-start gap-3 md:gap-4">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-gold-300 text-sm md:text-base"></i>
                             </div>
                             <div>
-                                <div class="text-sand-100 font-medium mb-1">Email</div>
-                                <a href="mailto:hello@polembeachyoga.com" class="text-sand-300 hover:text-gold-300 transition-colors">hello@polembeachyoga.com</a>
+                                <div class="text-sand-100 font-medium mb-1 text-sm md:text-base">Email</div>
+                                <a href="mailto:hello@polembeachyoga.com" class="text-sand-300 hover:text-gold-300 transition-colors text-sm md:text-base">hello@polembeachyoga.com</a>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fab fa-whatsapp text-gold-300"></i>
+                        <div class="flex items-start gap-3 md:gap-4">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fab fa-whatsapp text-gold-300 text-sm md:text-base"></i>
                             </div>
                             <div>
-                                <div class="text-sand-100 font-medium mb-1">WhatsApp</div>
-                                <a href="https://wa.me/919876543210" target="_blank" class="text-sand-300 hover:text-gold-300 transition-colors">+91 98765 43210</a>
+                                <div class="text-sand-100 font-medium mb-1 text-sm md:text-base">WhatsApp</div>
+                                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="text-sand-300 hover:text-gold-300 transition-colors text-sm md:text-base">+91 98765 43210</a>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-map-marker-alt text-gold-300"></i>
+                        <div class="flex items-start gap-3 md:gap-4">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-gold-300 text-sm md:text-base"></i>
                             </div>
                             <div>
-                                <div class="text-sand-100 font-medium mb-1">Location</div>
-                                <div class="text-sand-300">Polem Beach, Canacona,<br>South Goa, Goa 403702, India</div>
+                                <div class="text-sand-100 font-medium mb-1 text-sm md:text-base">Location</div>
+                                <div class="text-sand-300 text-sm md:text-base">Polem Beach, Canacona,<br>South Goa, Goa 403702, India</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-12 flex gap-4">
-                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-sand-300 hover:text-gold-300 hover:border-gold-400/30 transition-all">
-                            <i class="fab fa-instagram"></i>
+                    <div class="mt-8 md:mt-12 flex gap-3 md:gap-4">
+                        <a href="#" class="w-9 h-9 md:w-10 md:h-10 rounded-full glass flex items-center justify-center text-sand-300 hover:text-gold-300 hover:border-gold-400/30 transition-all border border-transparent" aria-label="Instagram">
+                            <i class="fab fa-instagram text-sm md:text-base"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-sand-300 hover:text-gold-300 hover:border-gold-400/30 transition-all">
-                            <i class="fab fa-facebook-f"></i>
+                        <a href="#" class="w-9 h-9 md:w-10 md:h-10 rounded-full glass flex items-center justify-center text-sand-300 hover:text-gold-300 hover:border-gold-400/30 transition-all border border-transparent" aria-label="Facebook">
+                            <i class="fab fa-facebook-f text-sm md:text-base"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-sand-300 hover:text-gold-300 hover:border-gold-400/30 transition-all">
-                            <i class="fab fa-youtube"></i>
+                        <a href="#" class="w-9 h-9 md:w-10 md:h-10 rounded-full glass flex items-center justify-center text-sand-300 hover:text-gold-300 hover:border-gold-400/30 transition-all border border-transparent" aria-label="YouTube">
+                            <i class="fab fa-youtube text-sm md:text-base"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-sand-300 hover:text-gold-300 hover:border-gold-400/30 transition-all">
-                            <i class="fab fa-google"></i>
+                        <a href="#" class="w-9 h-9 md:w-10 md:h-10 rounded-full glass flex items-center justify-center text-sand-300 hover:text-gold-300 hover:border-gold-400/30 transition-all border border-transparent" aria-label="Google Reviews">
+                            <i class="fab fa-google text-sm md:text-base"></i>
                         </a>
                     </div>
                 </div>
 
-                <div class="glass-light rounded-2xl p-8 reveal reveal-delay-2">
-                    <h3 class="font-serif text-2xl text-sand-50 mb-6">Send a Message</h3>
-                    <form onsubmit="event.preventDefault(); alert('Thank you for your message. We will respond within 24 hours.');" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-light rounded-2xl p-6 md:p-8 reveal reveal-delay-2">
+                    <h3 class="font-serif text-xl md:text-2xl text-sand-50 mb-4 md:mb-6">Send a Message</h3>
+                    <form onsubmit="event.preventDefault(); showNotification('Thank you for your message. We will respond within 24 hours.'); this.reset();" class="space-y-4 md:space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Name</label>
-                                <input type="text" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" placeholder="Your name" required>
+                                <input type="text" class="input-luxury" placeholder="Your name" required>
                             </div>
                             <div>
                                 <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Email</label>
-                                <input type="email" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" placeholder="your@email.com" required>
+                                <input type="email" class="input-luxury" placeholder="your@email.com" required>
                             </div>
                         </div>
                         <div>
                             <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Subject</label>
-                            <input type="text" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100" placeholder="How can we help?" required>
+                            <input type="text" class="input-luxury" placeholder="How can we help?" required>
                         </div>
                         <div>
                             <label class="block text-xs tracking-wider uppercase text-sand-400 mb-2">Message</label>
-                            <textarea rows="5" class="input-luxury w-full px-4 py-3 rounded-xl text-sand-100 resize-none" placeholder="Your message..." required></textarea>
+                            <textarea rows="4" class="input-luxury resize-none" placeholder="Your message..." required></textarea>
                         </div>
-                        <button type="submit" class="btn-luxury w-full py-4 bg-gold-400 text-deep-950 rounded-full text-xs tracking-[0.2em] uppercase font-medium">
+                        <button type="submit" class="btn-luxury w-full py-3.5 md:py-4 bg-gold-400 text-deep-950 rounded-full text-xs tracking-[0.2em] uppercase font-medium no-select">
                             Send Message
                         </button>
                     </form>
@@ -1321,53 +1348,53 @@
     </section>
 
     <!-- Terms & Conditions -->
-    <section id="terms" class="relative py-32 px-4 md:px-8 border-t border-sand-800/30">
+    <section id="terms" class="relative py-20 md:py-32 px-4 md:px-8 border-t border-sand-800/30">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-4">Legal</div>
-                <h2 class="font-serif text-4xl md:text-5xl text-sand-50 mb-6">Terms & Conditions</h2>
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <div class="text-xs tracking-[0.4em] uppercase text-gold-300 mb-3 md:mb-4">Legal</div>
+                <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-sand-50 mb-4 md:mb-6">Terms & Conditions</h2>
             </div>
 
-            <div class="space-y-12 reveal">
+            <div class="space-y-10 md:space-y-12 reveal">
                 <div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-4">Booking & Payment</h3>
-                    <p class="text-sand-300 leading-relaxed text-sm">A 50% non-refundable deposit is required to secure your reservation. The remaining balance is due 14 days prior to arrival. All payments are processed securely. Prices are inclusive of accommodation, meals, yoga sessions, and scheduled activities. Airfare and airport transfers are not included unless specified.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-3 md:mb-4">Booking & Payment</h3>
+                    <p class="text-sand-300 leading-relaxed text-sm md:text-base">A 50% non-refundable deposit is required to secure your reservation. The remaining balance is due 14 days prior to arrival. All payments are processed securely. Prices are inclusive of accommodation, meals, yoga sessions, and scheduled activities. Airfare and airport transfers are not included unless specified.</p>
                 </div>
                 <div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-4">Cancellation Policy</h3>
-                    <p class="text-sand-300 leading-relaxed text-sm">Cancellations made 30+ days before arrival receive a 50% refund of the deposit. Cancellations 14-29 days before receive a 25% refund. Cancellations within 14 days are non-refundable. We strongly recommend travel insurance. In the unlikely event we must cancel, a full refund will be provided.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-3 md:mb-4">Cancellation Policy</h3>
+                    <p class="text-sand-300 leading-relaxed text-sm md:text-base">Cancellations made 30+ days before arrival receive a 50% refund of the deposit. Cancellations 14-29 days before receive a 25% refund. Cancellations within 14 days are non-refundable. We strongly recommend travel insurance. In the unlikely event we must cancel, a full refund will be provided.</p>
                 </div>
                 <div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-4">Refund Policy</h3>
-                    <p class="text-sand-300 leading-relaxed text-sm">No refunds for early departure or unused services. If you extend your stay, additional nights are subject to availability and standard rates. Gift certificates are non-refundable but transferable.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-3 md:mb-4">Refund Policy</h3>
+                    <p class="text-sand-300 leading-relaxed text-sm md:text-base">No refunds for early departure or unused services. If you extend your stay, additional nights are subject to availability and standard rates. Gift certificates are non-refundable but transferable.</p>
                 </div>
                 <div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-4">Medical Disclaimer</h3>
-                    <p class="text-sand-300 leading-relaxed text-sm">Yoga and wellness activities involve physical exertion. Please consult your physician before participating. You must disclose any medical conditions, injuries, or pregnancies at the time of booking. We reserve the right to restrict participation in certain activities for your safety.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-3 md:mb-4">Medical Disclaimer</h3>
+                    <p class="text-sand-300 leading-relaxed text-sm md:text-base">Yoga and wellness activities involve physical exertion. Please consult your physician before participating. You must disclose any medical conditions, injuries, or pregnancies at the time of booking. We reserve the right to restrict participation in certain activities for your safety.</p>
                 </div>
                 <div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-4">Liability Waiver</h3>
-                    <p class="text-sand-300 leading-relaxed text-sm">Participation in all activities is at your own risk. Polem Beach Yoga and its instructors are not liable for any injury, loss, or damage to personal property. We maintain comprehensive insurance and adhere to highest safety standards.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-3 md:mb-4">Liability Waiver</h3>
+                    <p class="text-sand-300 leading-relaxed text-sm md:text-base">Participation in all activities is at your own risk. Polem Beach Yoga and its instructors are not liable for any injury, loss, or damage to personal property. We maintain comprehensive insurance and adhere to highest safety standards.</p>
                 </div>
                 <div>
-                    <h3 class="font-serif text-xl text-sand-50 mb-4">Privacy Policy</h3>
-                    <p class="text-sand-300 leading-relaxed text-sm">We respect your privacy. Personal information collected during booking is used solely for reservation purposes and will never be sold to third parties. We use cookies to enhance your browsing experience. By using our website, you consent to our privacy practices.</p>
+                    <h3 class="font-serif text-lg md:text-xl text-sand-50 mb-3 md:mb-4">Privacy Policy</h3>
+                    <p class="text-sand-300 leading-relaxed text-sm md:text-base">We respect your privacy. Personal information collected during booking is used solely for reservation purposes and will never be sold to third parties. We use cookies to enhance your browsing experience. By using our website, you consent to our privacy practices.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="relative py-20 px-4 md:px-8 border-t border-sand-800/30">
+    <footer class="relative py-16 md:py-20 px-4 md:px-8 border-t border-sand-800/30">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                <div>
-                    <div class="font-serif text-2xl text-sand-100 tracking-wider mb-6">Polem<span class="text-gold-300">.</span></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <div class="font-serif text-2xl text-sand-100 tracking-wider mb-4 md:mb-6">Polem<span class="text-gold-300">.</span></div>
                     <p class="text-sand-400 text-sm leading-relaxed">Transformational yoga and wellness retreats on the pristine shores of South Goa, India.</p>
                 </div>
                 <div>
-                    <div class="text-xs tracking-[0.2em] uppercase text-sand-400 mb-6">Explore</div>
-                    <div class="space-y-3">
+                    <div class="text-xs tracking-[0.2em] uppercase text-sand-400 mb-4 md:mb-6">Explore</div>
+                    <div class="space-y-2 md:space-y-3">
                         <a href="#retreats" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm">Retreats</a>
                         <a href="#experience" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm">Experience</a>
                         <a href="#accommodation" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm">Accommodation</a>
@@ -1375,8 +1402,8 @@
                     </div>
                 </div>
                 <div>
-                    <div class="text-xs tracking-[0.2em] uppercase text-sand-400 mb-6">Information</div>
-                    <div class="space-y-3">
+                    <div class="text-xs tracking-[0.2em] uppercase text-sand-400 mb-4 md:mb-6">Information</div>
+                    <div class="space-y-2 md:space-y-3">
                         <a href="#about" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm">About Us</a>
                         <a href="#directions" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm">Directions</a>
                         <a href="#contact" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm">Contact</a>
@@ -1384,8 +1411,8 @@
                     </div>
                 </div>
                 <div>
-                    <div class="text-xs tracking-[0.2em] uppercase text-sand-400 mb-6">Connect</div>
-                    <div class="space-y-3">
+                    <div class="text-xs tracking-[0.2em] uppercase text-sand-400 mb-4 md:mb-6">Connect</div>
+                    <div class="space-y-2 md:space-y-3">
                         <a href="#" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm"><i class="fab fa-instagram mr-2"></i> Instagram</a>
                         <a href="#" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm"><i class="fab fa-facebook mr-2"></i> Facebook</a>
                         <a href="#" class="block text-sand-300 hover:text-gold-300 transition-colors text-sm"><i class="fab fa-whatsapp mr-2"></i> WhatsApp</a>
@@ -1393,9 +1420,9 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-sand-800/30 gap-4">
-                <div class="text-sand-500 text-xs">© 2024 Polem Beach Yoga. All rights reserved.</div>
-                <div class="flex gap-6 text-xs text-sand-500">
+            <div class="flex flex-col md:flex-row justify-between items-center pt-6 md:pt-8 border-t border-sand-800/30 gap-3 md:gap-4">
+                <div class="text-sand-500 text-xs text-center md:text-left">© 2024 Polem Beach Yoga. All rights reserved.</div>
+                <div class="flex gap-4 md:gap-6 text-xs text-sand-500">
                     <a href="#terms" class="hover:text-sand-300 transition-colors">Terms</a>
                     <a href="#privacy" class="hover:text-sand-300 transition-colors">Privacy</a>
                     <a href="#" class="hover:text-sand-300 transition-colors">Cookies</a>
@@ -1403,6 +1430,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[10001] glass px-6 py-4 rounded-xl text-sand-100 text-sm opacity-0 transition-all duration-500 pointer-events-none transform translate-y-4">
+        <span id="notificationText"></span>
+    </div>
 
     <script>
         // Loading Screen
@@ -1416,13 +1448,13 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             const icon = document.getElementById('menuIcon');
-            menu.classList.toggle('hidden');
-            if (menu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
+            menu.classList.toggle('open');
+            if (menu.classList.contains('open')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         }
 
@@ -1431,7 +1463,6 @@
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
             const currentScroll = window.pageYOffset;
-
             if (currentScroll > 100) {
                 navbar.classList.add('opacity-95');
             } else {
@@ -1440,14 +1471,16 @@
             lastScroll = currentScroll;
         });
 
-        // Cursor Glow
-        document.addEventListener('mousemove', (e) => {
-            const glow = document.getElementById('cursorGlow');
-            if (glow) {
-                glow.style.left = e.clientX + 'px';
-                glow.style.top = e.clientY + 'px';
-            }
-        });
+        // Cursor Glow (desktop only)
+        if (window.matchMedia('(pointer: fine)').matches) {
+            document.addEventListener('mousemove', (e) => {
+                const glow = document.getElementById('cursorGlow');
+                if (glow) {
+                    glow.style.left = e.clientX + 'px';
+                    glow.style.top = e.clientY + 'px';
+                }
+            });
+        }
 
         // Intersection Observer for Reveal Animations
         const observerOptions = {
@@ -1471,6 +1504,7 @@
             const ctx = canvas.getContext('2d');
             let particles = [];
             let animationId;
+            let isVisible = true;
 
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
@@ -1506,12 +1540,17 @@
 
             function initParticles() {
                 particles = [];
-                for (let i = 0; i < 50; i++) {
+                const count = window.innerWidth < 768 ? 25 : 50;
+                for (let i = 0; i < count; i++) {
                     particles.push(new Particle());
                 }
             }
 
             function animateParticles() {
+                if (!isVisible) {
+                    animationId = requestAnimationFrame(animateParticles);
+                    return;
+                }
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => {
                     p.update();
@@ -1522,6 +1561,11 @@
 
             initParticles();
             animateParticles();
+
+            // Pause when not visible
+            document.addEventListener('visibilitychange', () => {
+                isVisible = !document.hidden;
+            });
         }
 
         // Lightbox
@@ -1529,20 +1573,40 @@
             const img = element.querySelector('img');
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightboxImg');
-            lightboxImg.src = img.src;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            if (img && lightbox && lightboxImg) {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
+            if (lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
         });
+
+        // Notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            if (notification && text) {
+                text.textContent = message;
+                notification.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                notification.classList.add('opacity-100', 'translate-y-0');
+                setTimeout(() => {
+                    notification.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    notification.classList.remove('opacity-100', 'translate-y-0');
+                }, 4000);
+            }
+        }
 
         // Multi-step Form
         let currentStep = 1;
@@ -1554,20 +1618,32 @@
                 const line = document.getElementById(`line${i}`);
                 const label = document.getElementById(`label${i}`);
 
-                if (i <= currentStep) {
-                    dot.classList.add('active');
-                    if (label) label.classList.add('text-gold-300');
-                } else {
-                    dot.classList.remove('active');
-                    if (label) label.classList.remove('text-gold-300');
+                if (dot) {
+                    if (i <= currentStep) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
                 }
 
-                if (line && i < currentStep) {
-                    line.classList.add('bg-gold-400');
-                    line.classList.remove('bg-sand-700');
-                } else if (line) {
-                    line.classList.remove('bg-gold-400');
-                    line.classList.add('bg-sand-700');
+                if (label) {
+                    if (i <= currentStep) {
+                        label.classList.add('text-gold-300');
+                        label.classList.remove('text-sand-400');
+                    } else {
+                        label.classList.remove('text-gold-300');
+                        label.classList.add('text-sand-400');
+                    }
+                }
+
+                if (line) {
+                    if (i < currentStep) {
+                        line.classList.add('bg-gold-400');
+                        line.classList.remove('bg-sand-700');
+                    } else {
+                        line.classList.remove('bg-gold-400');
+                        line.classList.add('bg-sand-700');
+                    }
                 }
             }
         }
@@ -1575,12 +1651,12 @@
         function changeStep(direction) {
             // Validate current step
             if (direction === 1 && currentStep === 1) {
-                const name = document.getElementById('fullName').value;
-                const email = document.getElementById('email').value;
-                const whatsapp = document.getElementById('whatsapp').value;
-                const country = document.getElementById('country').value;
+                const name = document.getElementById('fullName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const whatsapp = document.getElementById('whatsapp').value.trim();
+                const country = document.getElementById('country').value.trim();
                 if (!name || !email || !whatsapp || !country) {
-                    alert('Please fill in all fields.');
+                    showNotification('Please fill in all required fields.');
                     return;
                 }
             }
@@ -1589,7 +1665,7 @@
                 const arrival = document.getElementById('arrivalDate').value;
                 const departure = document.getElementById('departureDate').value;
                 if (!arrival || !departure) {
-                    alert('Please select both arrival and departure dates.');
+                    showNotification('Please select both arrival and departure dates.');
                     return;
                 }
             }
@@ -1597,79 +1673,103 @@
             if (direction === 1 && currentStep === totalSteps) return;
             if (direction === -1 && currentStep === 1) return;
 
-            document.getElementById(`step${currentStep}`).classList.add('hidden');
+            const currentStepEl = document.getElementById(`step${currentStep}`);
+            if (currentStepEl) currentStepEl.classList.add('hidden');
+
             currentStep += direction;
-            document.getElementById(`step${currentStep}`).classList.remove('hidden');
+
+            const nextStepEl = document.getElementById(`step${currentStep}`);
+            if (nextStepEl) nextStepEl.classList.remove('hidden');
 
             // Update buttons
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             const submitBtn = document.getElementById('submitBtn');
 
-            if (currentStep === 1) {
-                prevBtn.classList.add('hidden');
-            } else {
-                prevBtn.classList.remove('hidden');
+            if (prevBtn) {
+                if (currentStep === 1) {
+                    prevBtn.classList.add('hidden');
+                } else {
+                    prevBtn.classList.remove('hidden');
+                }
             }
 
-            if (currentStep === totalSteps) {
-                nextBtn.classList.add('hidden');
-                submitBtn.classList.remove('hidden');
-                updateConfirmation();
-            } else {
-                nextBtn.classList.remove('hidden');
-                submitBtn.classList.add('hidden');
+            if (nextBtn && submitBtn) {
+                if (currentStep === totalSteps) {
+                    nextBtn.classList.add('hidden');
+                    submitBtn.classList.remove('hidden');
+                    updateConfirmation();
+                } else {
+                    nextBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
+                }
             }
 
             updateStepIndicator();
         }
 
         function updateConfirmation() {
-            document.getElementById('confirmName').textContent = document.getElementById('fullName').value || '-';
-            document.getElementById('confirmCountry').textContent = document.getElementById('country').value || '-';
-            document.getElementById('confirmWhatsapp').textContent = document.getElementById('whatsapp').value || '-';
-
+            const name = document.getElementById('fullName');
+            const country = document.getElementById('country');
+            const whatsapp = document.getElementById('whatsapp');
+            const arrival = document.getElementById('arrivalDate');
+            const departure = document.getElementById('departureDate');
+            const guests = document.getElementById('guests');
+            const room = document.getElementById('room');
             const retreat = document.querySelector('input[name="retreat"]:checked');
-            document.getElementById('confirmRetreat').textContent = retreat ? retreat.value : '-';
 
-            document.getElementById('confirmArrival').textContent = document.getElementById('arrivalDate').value || '-';
-            document.getElementById('confirmDeparture').textContent = document.getElementById('departureDate').value || '-';
-            document.getElementById('confirmGuests').textContent = document.getElementById('guests').value || '-';
-            document.getElementById('confirmRoom').textContent = document.getElementById('room').value || '-';
+            const confirmName = document.getElementById('confirmName');
+            const confirmCountry = document.getElementById('confirmCountry');
+            const confirmWhatsapp = document.getElementById('confirmWhatsapp');
+            const confirmRetreat = document.getElementById('confirmRetreat');
+            const confirmArrival = document.getElementById('confirmArrival');
+            const confirmDeparture = document.getElementById('confirmDeparture');
+            const confirmGuests = document.getElementById('confirmGuests');
+            const confirmRoom = document.getElementById('confirmRoom');
+
+            if (confirmName) confirmName.textContent = name ? name.value || '-' : '-';
+            if (confirmCountry) confirmCountry.textContent = country ? country.value || '-' : '-';
+            if (confirmWhatsapp) confirmWhatsapp.textContent = whatsapp ? whatsapp.value || '-' : '-';
+            if (confirmRetreat) confirmRetreat.textContent = retreat ? retreat.value || '-' : '-';
+            if (confirmArrival) confirmArrival.textContent = arrival ? arrival.value || '-' : '-';
+            if (confirmDeparture) confirmDeparture.textContent = departure ? departure.value || '-' : '-';
+            if (confirmGuests) confirmGuests.textContent = guests ? guests.value || '-' : '-';
+            if (confirmRoom) confirmRoom.textContent = room ? room.value || '-' : '-';
         }
 
         // Form Submission with WhatsApp Integration
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            if (!document.getElementById('termsCheck').checked) {
-                alert('Please agree to the Terms & Conditions.');
+        function submitApplication() {
+            const termsCheck = document.getElementById('termsCheck');
+            if (!termsCheck || !termsCheck.checked) {
+                showNotification('Please agree to the Terms & Conditions.');
                 return;
             }
 
-            const name = document.getElementById('fullName').value;
-            const country = document.getElementById('country').value;
-            const whatsapp = document.getElementById('whatsapp').value;
-            const retreat = document.querySelector('input[name="retreat"]:checked').value;
+            const name = document.getElementById('fullName').value.trim();
+            const country = document.getElementById('country').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+            const retreatEl = document.querySelector('input[name="retreat"]:checked');
+            const retreat = retreatEl ? retreatEl.value : '';
             const arrival = document.getElementById('arrivalDate').value;
             const departure = document.getElementById('departureDate').value;
             const guests = document.getElementById('guests').value;
-            const requirements = document.getElementById('requirements').value;
+            const requirements = document.getElementById('requirements').value.trim();
 
-            const message = `Hello Polem Beach Yoga Team,%0A%0AI would like to apply for a retreat.%0A%0AName: ${name}%0ACountry: ${country}%0AWhatsApp: ${whatsapp}%0ASelected Retreat: ${retreat}%0AArrival Date: ${arrival}%0ADeparture Date: ${departure}%0AGuests: ${guests}%0A%0ASpecial Requirements:%0A${requirements || 'None'}%0A%0APlease contact me regarding availability.%0A%0AThank you.`;
+            const message = `Hello Polem Beach Yoga Team,%0A%0AI would like to apply for a retreat.%0A%0AName: ${encodeURIComponent(name)}%0ACountry: ${encodeURIComponent(country)}%0AWhatsApp: ${encodeURIComponent(whatsapp)}%0ASelected Retreat: ${encodeURIComponent(retreat)}%0AArrival Date: ${encodeURIComponent(arrival)}%0ADeparture Date: ${encodeURIComponent(departure)}%0AGuests: ${encodeURIComponent(guests)}%0A%0ASpecial Requirements:%0A${encodeURIComponent(requirements || 'None')}%0A%0APlease contact me regarding availability.%0A%0AThank you.`;
 
             // Open WhatsApp
             window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
 
             // Show success
-            alert('Your application has been prepared! WhatsApp will open to send your request to our team. We will also email you a confirmation shortly.');
-        });
+            showNotification('Your application has been prepared! WhatsApp will open to send your request.');
+        }
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
@@ -1677,6 +1777,21 @@
                     });
                 }
             });
+        });
+
+        // Close mobile menu on resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                const menu = document.getElementById('mobileMenu');
+                const icon = document.getElementById('menuIcon');
+                if (menu && menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    if (icon) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            }
         });
     </script>
 </body>
